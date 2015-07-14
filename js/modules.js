@@ -1,3 +1,6 @@
+//Search Box
+/////////////////////
+
 CORE.create_module("search-box", function(sb)) {
 	var input, button, reset;
 
@@ -33,3 +36,70 @@ CORE.create_module("search-box", function(sb)) {
 		}
 	};
 });
+
+
+
+// Filters Bar
+/////////////////////
+
+CORE.create_module("filters-bar", function(sb){
+	var filters;
+
+	return {
+		init: function() {
+			filters = sb.find('a');
+			sb.addEvent(filters, "click", this.filterProducts);
+		},
+		destroy: funtion() {
+			sb.removeEvent(filters, "click", this.filterProducts);
+			filter = null;
+		},
+		filterProducts: function(e) {
+			sb.notify({
+				type: 'change-filter',
+				data: e.currentTarget.innerHTML
+			});
+		}
+	};
+});
+
+
+
+// Product Panel
+/////////////////////
+
+CORE.create_module("product-panel", function(sb){
+	var products;
+
+	function eachProduct(fn) {
+		var i = 0, product;
+		for(; product = products[i++];) {
+			fn(product);
+		}
+	}
+	function reset() {
+		eachProduct(function (product) {
+			product.style.opacity = '1';
+		});
+	}
+
+	return {
+		init: function() {
+			var self = this;
+			products = sb.find("li");
+			sb.listen({
+				'change-filter' : this.change_filter,
+				'reset-filter'  : this.reset_filter,
+				'perfrom-search': this.search,
+				'quit-search'   : this.reset
+			});
+			eachProduct(function(product) {
+				sb.addEvent(product, 'click', self.addToCart);
+			});
+		},
+		destroy: function() {
+
+		}
+	};
+});
+
