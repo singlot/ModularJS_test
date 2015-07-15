@@ -15,7 +15,7 @@ CORE.create_module("search-box", function(sb)) {
 		},
 		destroy: function() {
 			sb.removeEvent(button, "click", this.handleSearch);
-			sb.removeEvent(button, "click", this.handleSearch);
+			sb.removeEvent(button, "click", this.quitSearch);
 			input = button = reset = null;
 		},
 		handleSearch: function() {
@@ -157,7 +157,14 @@ CORE.create_module("shopping-cart", function(sb) {
 				entry.innerHTML = parse(entry.innerHTML, 10) + 1;
 				cartItems[product.id]++;
 			} else {
-				entry = sb.create_element("li", {});
+				entry = sb.create_element("li", {id: "cart-" + product.id, children: [
+						sb.create_element("span", {'class' : 'product_name', text : product.name}),
+						sb.create_element("span", {'class' : 'quantity', text : '1'}),
+						sb.create_element("span", {'class' : 'price', text : '$' + product.id.toFixed(2)})
+					],
+					'class' : 'cart_entry'});
+				cart.appendChild(entry);
+				cartItems[product.id] = 1;
 			}
 		}
 	};
