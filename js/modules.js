@@ -1,7 +1,7 @@
 //Search Box
 /////////////////////
 
-CORE.create_module("search-box", function(sb)) {
+CORE.create_module("search-box", function(sb) {
 	var input, button, reset;
 
 	return {
@@ -169,3 +169,5 @@ CORE.create_module("shopping-cart", function(sb) {
 		}
 	};
 });
+
+CORE.start_all();

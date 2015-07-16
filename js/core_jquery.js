@@ -22,13 +22,14 @@ var CORE = (function() {
 					this.log(1, "Module '" + moduleID + "' Registratrion: FAILED: instance has no init or destroy functions");
 				}
 			} else {
-				this.log(1, "Module '" + to_s(moduleID) + "' Registratrion: FAILED: one or more arguments are of incorrect type");
+				this.log(1, "Module '" + moduleID + "' Registratrion: FAILED: one or more arguments are of incorrect type");
 			}
 		},
-		star: function(moduleID) {
+		start: function(moduleID) {
 			var mod = moduleData[moduleID];
 			if(mod) {
 				mod.instance =  mod.create(Sandbox.create(this, moduleID));
+				console.log("bu")
 				mod.instance.init();
 			}
 		},
@@ -57,12 +58,13 @@ var CORE = (function() {
 				}
 			}
 		},
-		register_events: function (evts, mod) {
+		registerEvents: function (evts, mod) {
 			if(this.is_obj(evts) && mod) {
 				if (moduleData[mod]) {
 					moduleData[mod].events = evts;
 				} else {
 					this.log(1, "");
+				}
 			} else {
 				this.log(1, "");
 			}
@@ -97,7 +99,7 @@ var CORE = (function() {
 				if(context && context.find) {
 					jqEls = context.find(selector);
 				} else {
-					jQuery(selector);
+					jqEls = jQuery(selector);
 				}
 
 				ret = jqEls.get();
@@ -115,6 +117,7 @@ var CORE = (function() {
 					}					
 					jQuery(element).bind(evt, fn);
 				} else {
+					this.log(1, "bind '" + moduleID + "': FAILED: nuse");
 					// log wrong arguments
 				}
 			},
@@ -126,6 +129,7 @@ var CORE = (function() {
 					}					
 					jQuery(element).unbind(evt, fn);
 				} else {
+					this.log(1, "unbind '" + moduleID + "': FAILED: tampoco");
 					// log wrong arguments
 				}
 			},

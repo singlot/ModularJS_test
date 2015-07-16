@@ -38,16 +38,15 @@ var Sandbox = {
               el.appendChild(child);
               i++;
             }
-            delete config.children;
-
-            if(config.text) {
-              e.appendChild (document.createTextNode(config.text));
-              delete config.text;
-            }
-            core.dom.apply_attrs(el, config);
-            return el;
+          delete config.children;
           }
+          if(config.text) {
+            e.appendChild (document.createTextNode(config.text));
+            delete config.text;
+          }
+          core.dom.apply_attrs(el, config);
         }
+        return el;
       }
     };
   }
