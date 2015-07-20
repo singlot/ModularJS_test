@@ -114,9 +114,10 @@ CORE.create_module("product-panel", function(sb){
 			});
 		},
 		search: function(query) {
+			reset();
 			query = query.toLowerCase();
 			eachProduct(function(product) {
-				if (product.getElementsByTagName('p')[0].innerHTML.toLowerCase().indexOf(query.toLowerCase()) < 0) {
+				if (product.getElementsByTagName('p')[0].innerHTML.toLowerCase().indexOf(query < 0) {
 					product.style.opacity = '0.2';
 				}
 			});	
@@ -125,7 +126,7 @@ CORE.create_module("product-panel", function(sb){
 			var li = e.currentTarget;
 			sb.notify({
 				type: 'add-item',
-				data: {id: li.id, name: li.getElementsByTagName('p')[0].innerHTML, price: parseInt(li.id, 10) }
+				data: {id: li.id, name: li.getElementsByTagName('p')[0].innerHTML, price: Number(li.id, 10) }
 			});
 		}
 	};
@@ -154,13 +155,13 @@ CORE.create_module("shopping-cart", function(sb) {
 		addItem : function (product) {
 			var entry = sb.find('#cart-' + product.id + ' .quantity')[0];
 			if(entry) {
-				entry.innerHTML = parse(entry.innerHTML, 10) + 1;
+				entry.innerHTML = Number(entry.innerHTML, 10) + 1;
 				cartItems[product.id]++;
 			} else {
 				entry = sb.create_element("li", {id: "cart-" + product.id, children: [
 						sb.create_element("span", {'class' : 'product_name', text : product.name}),
 						sb.create_element("span", {'class' : 'quantity', text : '1'}),
-						sb.create_element("span", {'class' : 'price', text : '$' + product.id.toFixed(2)})
+						sb.create_element("span", {'class' : 'price', text : '$' + Number(product.price).toFixed(2)})
 					],
 					'class' : 'cart_entry'});
 				cart.appendChild(entry);

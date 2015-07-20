@@ -117,7 +117,6 @@ var CORE = (function() {
 					}					
 					jQuery(element).bind(evt, fn);
 				} else {
-					this.log(1, "bind '" + moduleID + "': FAILED: nuse");
 					// log wrong arguments
 				}
 			},
@@ -129,7 +128,6 @@ var CORE = (function() {
 					}					
 					jQuery(element).unbind(evt, fn);
 				} else {
-					this.log(1, "unbind '" + moduleID + "': FAILED: tampoco");
 					// log wrong arguments
 				}
 			},

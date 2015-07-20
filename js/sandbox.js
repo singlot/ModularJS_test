@@ -41,7 +41,7 @@ var Sandbox = {
           delete config.children;
           }
           if(config.text) {
-            e.appendChild (document.createTextNode(config.text));
+            el.appendChild (document.createTextNode(config.text));
             delete config.text;
           }
           core.dom.apply_attrs(el, config);
